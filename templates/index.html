@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Vaidehi | Flask App 🚀</title>
+
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap');
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Poppins', sans-serif;
+        }
+
+        body {
+            background: linear-gradient(160deg, #0C0D16, #1A1C2B);
+            color: #ffffff;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            padding: 20px;
+            text-align: center;
+        }
+
+        .container {
+            max-width: 750px;
+            width: 100%;
+            padding: 30px;
+            background: rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(10px);
+            border-radius: 20px;
+            box-shadow: 0 8px 24px rgba(0, 0, 0, 0.6);
+        }
+
+        /* Animated text */
+        .typing {
+            font-size: 1.4rem;
+            color: #5599FF;
+            border-right: 3px solid #5599FF;
+            white-space: nowrap;
+            overflow: hidden;
+            width: 0;
+            margin: auto;
+            animation: typing 3.5s steps(30) forwards, blink 0.7s step-end infinite alternate;
+        }
+
+        @keyframes typing {
+            from { width: 0; }
+            to { width: 100%; }
+        }
+
+        @keyframes blink {
+            50% { border-color: transparent; }
+        }
+
+        h1 {
+            font-size: 2rem;
+            font-weight: 600;
+            color: #5599FF;
+            margin-bottom: 10px;
+        }
+
+        .about {
+            margin-top: 20px;
+            padding: 12px 15px;
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 12px;
+            line-height: 1.6;
+        }
+
+        .messages {
+            margin: 20px 0;
+            padding: 12px;
+            background: rgba(85, 153, 255, 0.08);
+            border: 1px solid rgba(85, 153, 255, 0.2);
+            border-radius: 12px;
+            max-height: 200px;
+            overflow-y: auto;
+            text-align: left;
+        }
+
+        .messages p {
+            padding: 8px;
+            background: rgba(255, 255, 255, 0.07);
+            border-radius: 8px;
+            margin-bottom: 6px;
+        }
+
+        input[type="text"] {
+            width: 100%;
+            padding: 12px;
+            border: 1px solid rgba(85, 153, 255, 0.3);
+            background: rgba(255, 255, 255, 0.05);
+            color: #fff;
+            border-radius: 8px;
+            margin-bottom: 10px;
+            text-align: center;
+        }
+
+        input[type="submit"] {
+            width: 100%;
+            padding: 12px;
+            background: #5599FF;
+            color: #ffffff;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 16px;
+        }
+
+        input[type="submit"]:hover {
+            background: #417ad6;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+
+        <h1>Vaidehi Savaliya</h1>
+
+        <!-- Animated typing title -->
+        <div class="typing">DevOps Engineer | 2× AWS Certified</div>
+
+        <div class="about">
+            <h2 style="color:#5599FF; margin-bottom:8px;">About Me</h2>
+            <p>
+                Hi, I'm <b>Vaidehi</b> 👋, a DevOps Engineer passionate about automation, CI/CD,
+                cloud computing, containers, and AWS services.
+            </p>
+
+            <p style="margin-top:10px;">
+                <b>Project:</b> I deployed a 2-tier Flask application (Flask + MySQL) on AWS EC2 using Docker.
+                I used Docker Compose, custom networks, volumes, and Jenkins CI/CD for automated deployments.
+            </p>
+        </div>
+
+        <div class="messages">
+            {% for message in messages %}
+                <p>{{ message[0] }}</p>
+            {% endfor %}
+        </div>
+
+        <form id="messageForm">
+            <input type="text" name="new_message" placeholder="Type your message..." required>
+            <input type="submit" value="Send">
+        </form>
+
+    </div>
+
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script>
+        $(document).ready(function() {
+            $("#messageForm").on("submit", function(event) {
+                event.preventDefault();
+                let input = $("input[name='new_message']");
+                let message = input.val().trim();
+
+                if (message === "") {
+                    alert("Message cannot be empty!");
+                    return;
+                }
+
+                $.ajax({
+                    url: "/submit",
+                    type: "POST",
+                    data: { new_message: message },
+                    success: function(response) {
+                        if (response && response.message) {
+                            $(".messages").append("<p>" + response.message + "</p>");
+                            input.val("");
+                        }
+                    }
+                });
+            });
+        });
+    </script>
+
+</body>
+
+</html>
