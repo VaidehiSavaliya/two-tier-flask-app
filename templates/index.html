@@ -1,10 +1,9 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Vaidehi | Flask App 🚀</title>
+    <title>Vaidehi | DevOps Portfolio 🚀</title>
 
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap');
@@ -16,36 +15,81 @@
             font-family: 'Poppins', sans-serif;
         }
 
+        /* 🔥 Animated Background */
         body {
-            background: linear-gradient(160deg, #0C0D16, #1A1C2B);
-            color: #ffffff;
+            background: radial-gradient(circle at 20% 20%, #1a1f3c, #0c0f1f 60%);
+            min-height: 100vh;
+            overflow: hidden;
             display: flex;
             justify-content: center;
             align-items: center;
-            min-height: 100vh;
             padding: 20px;
-            text-align: center;
+            color: #fff;
+            position: relative;
+        }
+
+        /* Floating glowing circles */
+        .bg-circle {
+            position: absolute;
+            border-radius: 50%;
+            background: rgba(85, 153, 255, 0.15);
+            filter: blur(50px);
+            animation: float 8s infinite ease-in-out alternate;
+        }
+
+        .bg1 { width: 350px; height: 350px; top: -50px; left: -50px; animation-delay: 0s; }
+        .bg2 { width: 300px; height: 300px; bottom: -40px; right: -20px; animation-delay: 2s; }
+
+        @keyframes float {
+            from { transform: translateY(0px); }
+            to { transform: translateY(40px); }
         }
 
         .container {
-            max-width: 750px;
-            width: 100%;
-            padding: 30px;
-            background: rgba(255, 255, 255, 0.05);
-            backdrop-filter: blur(10px);
+            width: 95%;
+            max-width: 780px;
+            padding: 35px;
+            background: rgba(255, 255, 255, 0.06);
+            backdrop-filter: blur(15px);
             border-radius: 20px;
-            box-shadow: 0 8px 24px rgba(0, 0, 0, 0.6);
+            box-shadow: 0 0 25px rgba(0, 0, 0, 0.5);
+            animation: fadeIn 1.3s ease-in-out;
         }
 
-        /* Animated text */
+        @keyframes fadeIn {
+            from { opacity: 0; transform: scale(0.92); }
+            to { opacity: 1; transform: scale(1); }
+        }
+
+        h1 {
+            font-size: 2.4rem;
+            color: #5599FF;
+            font-weight: 600;
+            margin-bottom: 8px;
+        }
+
+        /* 🔹 Animated subtitle */
+        .subtitle {
+            font-size: 1.2rem;
+            color: #8bb8ff;
+            opacity: 0;
+            animation: slideDown 1s forwards 0.6s;
+        }
+
+        @keyframes slideDown {
+            from { opacity: 0; transform: translateY(-15px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* Typing animation */
         .typing {
-            font-size: 1.4rem;
+            font-size: 1.35rem;
+            margin: 20px auto;
             color: #5599FF;
             border-right: 3px solid #5599FF;
             white-space: nowrap;
             overflow: hidden;
             width: 0;
-            margin: auto;
             animation: typing 3.5s steps(30) forwards, blink 0.7s step-end infinite alternate;
         }
 
@@ -58,46 +102,44 @@
             50% { border-color: transparent; }
         }
 
-        h1 {
-            font-size: 2rem;
-            font-weight: 600;
-            color: #5599FF;
-            margin-bottom: 10px;
-        }
-
         .about {
             margin-top: 20px;
-            padding: 12px 15px;
-            background: rgba(255, 255, 255, 0.05);
+            padding: 15px;
+            background: rgba(255, 255, 255, 0.07);
             border-radius: 12px;
-            line-height: 1.6;
+            line-height: 1.65;
         }
 
         .messages {
-            margin: 20px 0;
-            padding: 12px;
-            background: rgba(85, 153, 255, 0.08);
-            border: 1px solid rgba(85, 153, 255, 0.2);
+            margin: 25px 0;
+            padding: 15px;
+            background: rgba(85, 153, 255, 0.1);
             border-radius: 12px;
-            max-height: 200px;
+            max-height: 240px;
             overflow-y: auto;
-            text-align: left;
+            box-shadow: inset 0 0 15px rgba(0,0,0,0.4);
         }
 
         .messages p {
-            padding: 8px;
-            background: rgba(255, 255, 255, 0.07);
-            border-radius: 8px;
-            margin-bottom: 6px;
+            padding: 10px;
+            background: rgba(255,255,255,0.08);
+            border-radius: 10px;
+            margin-bottom: 8px;
+            animation: fadeInMsg 0.3s ease-in-out;
+        }
+
+        @keyframes fadeInMsg {
+            from { opacity: 0; transform: translateY(5px); }
+            to { opacity: 1; transform: translateY(0); }
         }
 
         input[type="text"] {
             width: 100%;
             padding: 12px;
-            border: 1px solid rgba(85, 153, 255, 0.3);
-            background: rgba(255, 255, 255, 0.05);
+            background: rgba(255,255,255,0.06);
+            border: 1px solid rgba(85,153,255,0.3);
+            border-radius: 10px;
             color: #fff;
-            border-radius: 8px;
             margin-bottom: 10px;
             text-align: center;
         }
@@ -105,38 +147,45 @@
         input[type="submit"] {
             width: 100%;
             padding: 12px;
-            background: #5599FF;
-            color: #ffffff;
             border: none;
-            border-radius: 8px;
+            background: #5599FF;
+            color: #fff;
+            border-radius: 10px;
             cursor: pointer;
             font-size: 16px;
+            transition: 0.3s;
         }
 
         input[type="submit"]:hover {
-            background: #417ad6;
+            background: #3f7ad3;
         }
     </style>
 </head>
 
 <body>
+
+    <!-- Glowing circles -->
+    <div class="bg-circle bg1"></div>
+    <div class="bg-circle bg2"></div>
+
     <div class="container">
 
         <h1>Vaidehi Savaliya</h1>
 
-        <!-- Animated typing title -->
-        <div class="typing">DevOps Engineer | 2× AWS Certified</div>
+        <div class="subtitle">DevOps Engineer | 2× AWS Certified | Scaling with Automation</div>
+
+        <div class="typing">AWS & DevOps Engineer | Automating Infrastructure 🚀</div>
 
         <div class="about">
-            <h2 style="color:#5599FF; margin-bottom:8px;">About Me</h2>
             <p>
-                Hi, I'm <b>Vaidehi</b> 👋, a DevOps Engineer passionate about automation, CI/CD,
-                cloud computing, containers, and AWS services.
+                I am an AWS Certified Solutions Architect and DevOps Engineer with 6 months of hands-on experience in 
+                automating infrastructure, implementing CI/CD pipelines, and managing secure cloud deployments.
             </p>
 
             <p style="margin-top:10px;">
-                <b>Project:</b> I deployed a 2-tier Flask application (Flask + MySQL) on AWS EC2 using Docker.
-                I used Docker Compose, custom networks, volumes, and Jenkins CI/CD for automated deployments.
+                Skilled in provisioning and monitoring AWS environments, cost optimization, and ensuring 
+                high system availability using Docker, Git, Jenkins, and Terraform.  
+                Focused on accelerating release cycles and helping teams deliver faster & more reliably.
             </p>
         </div>
 
@@ -182,5 +231,4 @@
     </script>
 
 </body>
-
 </html>
